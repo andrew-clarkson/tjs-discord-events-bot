@@ -6,6 +6,9 @@ import {
 } from "discord.js";
 import { chunk, shuffle } from "lodash-es";
 
+const breakoutFromChannel = "The Coffee Chat Stage"
+const endBreakoutChannel = "lobby"
+
 export const data = new SlashCommandBuilder()
   .setName("breakout")
   .setDescription("Manage breakout rooms")
@@ -38,7 +41,7 @@ const createBreakoutRooms = async (interaction) => {
 
   // Find the lobby channel where users start
   const lobby = Array.from(category.children.cache.values()).find(({ name }) =>
-    name.includes("lobby")
+    name.includes(breakoutFromChannel)
   );
 
   if (!lobby) return;
@@ -98,7 +101,7 @@ const deleteBreakoutRooms = async (interaction) => {
 
   // Find the lobby channel where users start
   const lobby = Array.from(category.children.cache.values()).find(({ name }) =>
-    name.includes("lobby")
+    name.includes(endBreakoutChannel)
   );
 
   // Move users to Lobby
